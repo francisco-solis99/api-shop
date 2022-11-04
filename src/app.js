@@ -10,6 +10,12 @@ app.set('nameApp', 'api-shop');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); //using the middleware to convert the respons in a valid JS object
 
+app.get('/', (request, response) => {
+  response.send('<h1>Shop API</h1>')
+});
+
+app.use('/api', require('./routes'))
+
 
 // Sequelize connection
 // try {
