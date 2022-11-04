@@ -24,10 +24,13 @@ models.forEach(model => model(sequelize));
 // Configuring Relaions
 
 // Products with reviews
-const { products, reviews } = sequelize.models;
+const { products, reviews, users, orders } = sequelize.models;
 reviews.belongsTo(products); // one to one relation
 
 // User with orders
+orders.belongsTo(users);
+// Products with orders
+orders.belongsTo(products);
 
 
 module.exports = sequelize;
