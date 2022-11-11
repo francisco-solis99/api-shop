@@ -28,9 +28,9 @@ const { products, reviews, users, orders } = sequelize.models;
 reviews.belongsTo(products); // one to one relation
 
 // User with orders
-orders.belongsTo(users);
+orders.belongsTo(users); //Relation order has one user
 // Products with orders
-orders.belongsTo(products);
+orders.belongsTo(products); //relation order has one product
 
 
 module.exports = sequelize;

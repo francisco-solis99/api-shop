@@ -5,6 +5,29 @@ const getOrders = async (req, res) => {
   return res.status(200).json({ data: orders });
 };
 
+const getOrder = async (req, res) => {
+  const {id} = req.params;
+  const order = await sequelize.models.orders.findOne({
+    where: { id },
+    // include: sequelize.models.users
+    // include: [
+    //   sequelize.models.users,
+    //   sequelize.models.products
+    // ],
+    include: [
+      {
+        model: sequelize.models.users,
+        attributes: ['name', 'maternalSurname']
+      },
+      {
+        model: sequelize.models.products,
+        attributes: ['id', 'name', 'price']
+      }
+    ]
+  });
+  return res.status(200).json({ data: order });
+};
+
 const createOrder = async (req, res) => {
   const { body } = req;
   const order = await sequelize.models.orders.create({
@@ -43,6 +66,7 @@ const deleteOrder = async (req, res) => {
 module.exports = {
   createOrder,
   getOrders,
+  getOrder,
   updateOrder,
   deleteOrder
 }
